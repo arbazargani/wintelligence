@@ -4,3 +4,5 @@ if ( !getCookie('wgid') ) {
 } else {
     console.log( "user authorized-> " + getWGID() );
 }
+
+getServerStatus('https://arbazargani.ir');

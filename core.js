@@ -1,3 +1,6 @@
+/*
+* Fundamentals to handle the cookie part for user authorization.
+*/
 function makeWGID() {
     return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
         (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
@@ -22,4 +25,20 @@ function deleteCookie(name) {
 }
 function getWGID() {
     return getCookie('wgid');
+}
+
+/*
+* Fundamentals to connect to application server.
+*/
+function getServerStatus(destination) {
+    var handle = new XMLHttpRequest();
+    handle.onreadystatechange = function() {
+        console.log(this.status)
+        if ( this.readyState == 4 ) {
+            console.log( this.status );
+       }
+    };
+    handle.open("GET", destination, false); // true for synchronous request.
+    handle.setRequestHeader("Access-Control-Allow-Origin", "*");
+    handle.send();
 }
